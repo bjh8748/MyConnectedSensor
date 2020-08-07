@@ -16,18 +16,22 @@ const char* password = "1111133333";
 //const char* host = "api.thingspeak.com";
 String url = "http://api.thingspeak.com/update?api_key=XMFKVF94NW54PH45&field1=";
 static unsigned long mark;
+int dpm25,dpm10;
 
-void got_dust(int pm25, int pm10) {
+void got_dust(int _pm25, int _pm10) {
    Serial.printf("pm25,pm10=");
-   Serial.println(String(pm25) +","+ String(pm10));
+   Serial.println(String(_pm25) +","+ String(_pm10));
+   dpm25 = _pm25;
+   dpm10 = _pm10;
 }
 
 void send(float temp) {
 	HTTPClient http;
 	
     Serial.print("\nRequesting URL: ");
-    Serial.println(url+String(temp));
-	http.begin(url+String(temp));
+	String s = url+String(temp) +"&field2="+ String(dpm25) +"&field3="+ String(dpm10);
+    Serial.println(s);
+	http.begin(s);
 
 	int httpCode = http.GET();
 	if(httpCode == HTTP_CODE_OK) {
