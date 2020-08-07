@@ -14,7 +14,7 @@ HardwareSerial dustport(2);  //(통신속도, UART모드, RX핀번호 16, TX핀�
 const char* ssid     = "Hallym WiFi";
 const char* password = "1111133333";
 //const char* host = "api.thingspeak.com";
-String url = "http://api.thingspeak.com/update?api_key=XMFKVF94NW54PH45&field1=";
+String url = "http://api.thingspeak.com/update?api_key=your_own_api_key";
 static unsigned long mark;
 int dpm25,dpm10;
 
