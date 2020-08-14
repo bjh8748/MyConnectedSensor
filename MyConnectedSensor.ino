@@ -1,18 +1,18 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
-#define ONE_WIRE_BUS 23
+#define ONE_WIRE_BUS 19
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 DeviceAddress insideThermometer;
 #include "Dust.h"
 Dust dust;
 
-HardwareSerial dustport(2);  //(통신속도, UART모드, RX핀번호 16, TX핀번호 17)
+HardwareSerial dustport(1);  //(통신속도, UART모드, RX핀번호 16, TX핀번호 17)
 
 #include <WiFi.h>
 #include <HTTPClient.h>
-const char* ssid     = "Hallym WiFi";
-const char* password = "1111133333";
+const char* ssid     = "산학WiFi_208_2.4G";
+const char* password = "";
 //const char* host = "api.thingspeak.com";
 String url = "http://api.thingspeak.com/update?api_key=your_own_api_key";
 static unsigned long mark;
@@ -29,7 +29,7 @@ void send(float temp) {
 	HTTPClient http;
 	
     Serial.print("\nRequesting URL: ");
-	String s = url+String(temp) +"&field2="+ String(dpm25) +"&field3="+ String(dpm10);
+	String s = url+"&field1="+String(temp) +"&field2="+ String(dpm25) +"&field3="+ String(dpm10);
     Serial.println(s);
 	http.begin(s);
 
@@ -82,7 +82,7 @@ void ticker() {
 
 void setup() {
 	Serial.begin(115200);
-	dustport.begin(9600);
+	dustport.begin(9600, SERIAL_8N1, 5, 4);
 	sensors.begin();
 	Serial.print("Found ");
 	Serial.print(sensors.getDeviceCount(), DEC);
