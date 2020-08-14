@@ -7,7 +7,7 @@ DeviceAddress insideThermometer;
 #include "Dust.h"
 Dust dust;
 
-HardwareSerial dustport(1);  //(통신속도, UART모드, RX핀번호 16, TX핀번호 17)
+HardwareSerial dustport(1);  //(통신속도, UART모드, RX핀번호 5)
 
 #include <WiFi.h>
 #include <HTTPClient.h>
